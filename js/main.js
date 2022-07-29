@@ -1,7 +1,7 @@
 let elForm = document.querySelector(".form");
 let elInput = document.querySelector(".rating__input");
 
-let moviesArray = movies.slice(0, 6);
+let moviesArray = movies.slice(0, 10);
 
 function normolize(array) {
     let newArray = [];
@@ -48,17 +48,16 @@ function moviesRender(array, wrapper) {
 }
 moviesRender(newArray, elMovieWrapper)
 
-elForm.addEventListener("submit", function (evt) {
-    evt.preventDefault()
-
-    inputValue = elInput.value.trim()
-    
-    elMovieWrapper.innerHTML = null
-   for (const item of newArray) {
-    if (inputValue >= 6.5) {
-        elMovieWrapper = item.imdbRating >= 6.5
+elForm.addEventListener("submit" , function (evt) {
+    evt.preventDefault();
+    let inputValue = Number(document.querySelector(".rating__input").value.trim())
+    let numbersArray = []
+    for (let i = 0; i < newArray.length; i++) {
+        if (inputValue <= newArray[i].imdbRating) {
+            numbersArray.push(newArray[i])
+        }
     }
-   }
+    moviesRender(numbersArray , elMovieWrapper)
 })
 
 
