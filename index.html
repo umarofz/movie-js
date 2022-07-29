@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <title>Document</title>
+</head>
+<body>
+  <header class="header"></header>
+
+  <main class="main">
+    <section class="hero">
+      <div class="container">
+        <h2 class="text-center fw-bold my-2 mb-5">Movies catalog</h2>
+
+        <div class="row">
+          <div class="col-4">
+            <form action="https://echo.htmlacademy.ru/" method="post" class="mb-3 px-3 border-1 form">
+              <label for="input1" class="w-100">
+                <input type="text" class="form-control" placeholder="ave" id="input1">
+              </label>
+
+              <label for="input2" class="w-100">
+                <input type="number" class="form-control my-4 rating__input" placeholder="5" id="input2" step="0.5">
+              </label>
+
+              <select class="form-select my-1" aria-label="Default select example">
+                <option selected>All</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+
+              <select class="form-select my-3" aria-label="Default select example">
+                <option selected>Rating (high to low)</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+
+              <button type="submit" class="btn bg-primary text-white w-100 p-2">Search</button>
+            </form>
+
+            <div>
+              <h2 class="fw-bold mx-3">Bookmarked movies</h2>
+
+              <div class="border p-3">
+                <h4 class="mx-1 mb-2">Avengers:Infinity War</h4>
+
+                <button class="btn bg-danger text-white rounded-1 pe-2 ps-2 mx-1">Remove</button>
+              </div>
+              <div class="border p-3">
+                <h4 class="mx-1 mb-2">The Avengers</h4>
+
+                <button class="btn bg-danger text-white rounded-1 pe-2 ps-2 mx-1">Remove</button>
+              </div>
+              <div class="border p-3">
+                <h4 class="mx-1 mb-2">12 Years a Slave</h4>
+
+                <button class="btn bg-danger text-white rounded-1 pe-2 ps-2 mx-1">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-8">
+            <h3 class="fw-bold h4">Search results: 39</h3>
+
+            <div class="alert alert-success">Use the form on the leftto search for a movie</div>
+
+            <div class="row mb-5 movie__wrapper">
+              <div class="col-6">
+                <div class="m-1">
+                  <div class="card">
+                    <img src="./images/trailer.jpg" class="card-img-top mb-1" alt="trailer-img">
+                    <div class="card-body p-3">
+                      <h5 class="card-title">Avengers: Infinity War</h5>
+                      <p class="card-text h5 mb-2"><img class="me-2" src="./images/calendar.svg" alt="calendar" width="35" height="35">2018</p>
+
+                      <p class="card-text mb-3"><img class="me-2" src="./images/star.svg" alt="star">8.7</p>
+
+                      <div class="d-flex justify-content-between">
+                        <button class="btn btn-outline-primary p-2">Watch trailer</button>
+                        <button class="btn btn-outline-info p-2">More info</button>
+                        <button class="btn btn-outline-success p-2">Bookmark</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="btn-toolbar d-flex align-items-center flex-column" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group me-2" role="group" aria-label="First group">
+                <button type="button" class="btn btn-outline-primary">1</button>
+                <button type="button" class="btn btn-outline-primary">2</button>
+                <button type="button" class="btn btn-outline-primary">3</button>
+                <button type="button" class="btn btn-outline-primary">4</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <template id="movie__card">
+    <div class="col-6">
+      <div class="m-1">
+        <div class="card">
+          <img src="./images/trailer.jpg" class="card-img-top mb-1 movie__img" alt="trailer-img">
+          <div class="card-body p-3">
+            <h5 class="card-title movie__title">Avengers: Infinity War</h5>
+            <div class="d-flex mb-2 mt-2">
+              <img class="me-2" src="./images/calendar.svg" alt="calendar" width="35" height="35">
+              <p class="card-text h5 mb-2 movie__year">2018</p>
+            </div>
+
+            <div class="d-flex">
+              <img class="me-2" src="./images/star.svg" alt="star">
+              <p class="card-text mb-3 movie__rating">8.7</p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <a href="#" target="_blank" class="btn btn-outline-primary p-2 movie__url">Watch trailer</a>
+              <button class="btn btn-outline-info p-2">More info</button>
+              <button class="btn btn-outline-success p-2">Bookmark</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="./js/movies.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/bootstrap.js"></script>
+</body>
+</html>
