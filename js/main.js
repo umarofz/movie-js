@@ -1,7 +1,7 @@
 let elForm = document.querySelector(".form");
 let elInput = document.querySelector(".rating__input");
 
-let moviesArray = movies.slice(0, 10);
+let moviesArray = movies.slice(0, 30);
 
 function normolize(array) {
     let newArray = [];
