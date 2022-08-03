@@ -96,22 +96,32 @@ elForm.addEventListener("submit" , function (evt) {
         filteredArray.sort((a, b) => {
             return b.imdbRating - a.imdbRating
         })
-    }
+    };
     if (inputSorting == "rating_low_high") {
         filteredArray.sort((a, b) => {
             return a.imdbRating - b.imdbRating
         })
-    }
+    };
     if (inputSorting == "year_high_low") {
         filteredArray.sort((a, b) => {
             return b.movieYear - a.movieYear
         })
-    }
+    };
     if (inputSorting == "year_low_high") {
         filteredArray.sort((a, b) => {
             return a.movieYear - b.movieYear
         })
-    }
+    };
+    if (inputSorting == "a-z") {
+        filteredArray.sort((a, b) => {
+            return a === b ? 0 : (a.title < b.title) ? -1 : 1;
+        })
+    };
+    if (inputSorting == "z-a") {
+        filteredArray.sort((a, b) => {
+            return a === b ? 0 : (a.title < b.title) ? 1 : -1;
+        })
+    };
     moviesRender(filteredArray, elMovieWrapper);
 })
 
