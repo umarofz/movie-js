@@ -5,6 +5,7 @@ let elInput = document.querySelector(".rating__input");
 let elInputYear = document.querySelector(".year__input");
 let elSelectCategories = document.querySelector(".select__categories");
 let elSpan = document.querySelector(".result__span")
+let elInputSorting = document.querySelector(".form__sorting")
 
 let moviesArray = movies.slice(0, 20);
 
@@ -80,41 +81,38 @@ moviesRender(normolizedArray, elMovieWrapper);
 elForm.addEventListener("submit" , function (evt) {
     evt.preventDefault()
     
-    let inputValue = Number(document.querySelector(".rating__input").value.trim())
-    if (inputValue) {
-        let numbersArray = []
-        for (let i = 0; i < normolizedArray.length; i++) {
-            if (inputValue <= normolizedArray[i].imdbRating) {
-                numbersArray.push(normolizedArray[i])
-            }
-        }
-        moviesRender(numbersArray , elMovieWrapper)
-    } else {
-        let inputValueYear = Number(document.querySelector(".year__input").value.trim())
-        let yearsArray = []
-        for (let i = 0; i < normolizedArray.length; i++) {
-            if (inputValueYear == normolizedArray[i].movieYear) {
-                yearsArray.push(normolizedArray[i])
-            }
-        }
-        moviesRender(yearsArray , elMovieWrapper)
-    }
-    
-    
-})
-
-elSelectCategories.addEventListener("input", function (evt) {
-    let selectCategory = elSelectCategories.value;
+    let inputYear = elInputYear.value.trim();
+    let inputRating = elInput.value.trim();
+    let inputSorting = elInputSorting.value.trim();
+    let inputCategory = elSelectCategories.value.trim();
     
     let filteredArray = normolizedArray.filter(function (item) {
-        return item.categories.includes(selectCategory)
+        let isTrue = inputCategory == "all" ? true: item.categories.includes(inputCategory);
+        let validation = item.movieYear >= inputYear && item.imdbRating >= inputRating && isTrue
+        return validation
     })
-    
-    if (selectCategory != "all") {
-        moviesRender(filteredArray, elMovieWrapper);
-    } else {
-        moviesRender(normolizedArray, elMovieWrapper);
+
+    if (inputSorting == "rating_high_low") {
+        filteredArray.sort((a, b) => {
+            return b.imdbRating - a.imdbRating
+        })
     }
+    if (inputSorting == "rating_low_high") {
+        filteredArray.sort((a, b) => {
+            return a.imdbRating - b.imdbRating
+        })
+    }
+    if (inputSorting == "year_high_low") {
+        filteredArray.sort((a, b) => {
+            return b.movieYear - a.movieYear
+        })
+    }
+    if (inputSorting == "year_low_high") {
+        filteredArray.sort((a, b) => {
+            return a.movieYear - b.movieYear
+        })
+    }
+    moviesRender(filteredArray, elMovieWrapper);
 })
 
 
