@@ -9,31 +9,31 @@
 </head>
 <body>
   <header class="header"></header>
-
+  
   <main class="main">
     <section class="hero">
       <div class="container">
         <h2 class="text-center fw-bold my-2 mb-5">Movies catalog</h2>
-
+        
         <div class="row">
           <div class="col-4">
             <form action="" method="post" class="mb-3 px-3 border-1 form">
               <label for="input1" class="w-100">
                 <input type="text" class="form-control mb-3 mt-2" placeholder="ave" id="input1">
               </label>
-
+              
               <label for="input2" class="w-100">
                 <input type="number" class="form-control my-2 year__input" placeholder="2022" id="input2" step="1" max="2023">
               </label>
-
+              
               <label for="input2" class="w-100">
                 <input type="number" class="form-control my-3 rating__input" placeholder="5" id="input2" step="0.1" max="10">
               </label>
-
+              
               <select class="form-select my-1 select__categories" aria-label="Default select example">
                 <option selected value="all">All</option>
               </select>
-
+              
               <select class="form-select my-3 form__sorting" aria-label="Default select example">
                 <option value="rating_high_low" selected>Rating (high to low)</option>
                 <option value="rating_low_high">Rating (low to high)</option>
@@ -42,39 +42,39 @@
                 <option value="a-z">A-Z</option>
                 <option value="z-a">Z-A</option>
               </select>
-
+              
               <button type="submit" class="btn bg-primary text-white w-100 p-2">Search</button>
             </form>
-
+            
             <div>
               <h2 class="fw-bold mx-3">Bookmarked movies</h2>
-
+              
               <div class="border p-3">
                 <h4 class="mx-1 mb-2">Avengers:Infinity War</h4>
-
+                
                 <button class="btn bg-danger text-white rounded-1 pe-2 ps-2 mx-1">Remove</button>
               </div>
               <div class="border p-3">
                 <h4 class="mx-1 mb-2">The Avengers</h4>
-
+                
                 <button class="btn bg-danger text-white rounded-1 pe-2 ps-2 mx-1">Remove</button>
               </div>
               <div class="border p-3">
                 <h4 class="mx-1 mb-2">12 Years a Slave</h4>
-
+                
                 <button class="btn bg-danger text-white rounded-1 pe-2 ps-2 mx-1">Remove</button>
               </div>
             </div>
           </div>
-
+          
           <div class="col-8">
             <h3 class="fw-bold h4">Search results: <span class="result__span"></span></h3>
-
+            
             <div class="alert alert-success">Use the form on the leftto search for a movie</div>
-
+            
             <div class="row mb-5 movie__wrapper">
             </div>
-
+            
             <div class="btn-toolbar d-flex align-items-center flex-column" role="toolbar" aria-label="Toolbar with button groups">
               <div class="btn-group me-2" role="group" aria-label="First group">
                 <button type="button" class="btn btn-outline-primary">1</button>
@@ -88,7 +88,31 @@
       </div>
     </section>
   </main>
-
+  
+  <!-- Button trigger modal -->
+  <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+  </button> -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title modal__title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body modal__body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <template id="movie__card">
     <div class="col-6">
       <div class="m-1">
@@ -100,17 +124,17 @@
               <img class="me-2" src="./images/calendar.svg" alt="calendar" width="35" height="35">
               <p class="card-text h5 mb-2 movie__year">2018</p>
             </div>
-
+            
             <div class="d-flex">
               <img class="me-2" src="./images/star.svg" alt="star">
               <p class="card-text mb-3 movie__rating">8.7</p>
             </div>
-
+            
             <p class="card-text mb-3 movie__categories">Fantasy</p>
-
+            
             <div class="d-flex justify-content-between">
               <a href="#" target="_blank" class="btn btn-outline-primary p-2 movie__url">Watch trailer</a>
-              <button class="btn btn-outline-info p-2">More info</button>
+              <button type="button" class="btn btn-outline-info p-2 movie__info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">More info</button>
               <button class="btn btn-outline-success p-2">Bookmark</button>
             </div>
           </div>
@@ -118,7 +142,7 @@
       </div>
     </div>
   </template>
-
+  
   <script src="./js/movies.js"></script>
   <script src="./js/main.js"></script>
   <script src="./js/bootstrap.js"></script>

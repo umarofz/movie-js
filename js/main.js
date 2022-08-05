@@ -4,14 +4,18 @@ let elForm = document.querySelector(".form");
 let elInput = document.querySelector(".rating__input");
 let elInputYear = document.querySelector(".year__input");
 let elSelectCategories = document.querySelector(".select__categories");
+let elModalTitle = document.querySelector(".modal__title");
+let elModalBody = document.querySelector(".modal__body");
 let elSpan = document.querySelector(".result__span")
 let elInputSorting = document.querySelector(".form__sorting")
 
-let moviesArray = movies.slice(0, 20);
+let moviesArray = movies.slice(0, 30);
 
 let normolizedArray = moviesArray.map(item => {
     return {
+        id: item.imdb_id,
         title: item.Title.toString(),
+        summary: item.summary,
         videoUrl: `https://www.youtube.com/watch?v=${item.ytid}`,
         categories: item.Categories.split("|"),
         movieYear: item.movie_year,
@@ -69,6 +73,7 @@ function moviesRender(array, wrapper) {
         templateItem.querySelector(".movie__rating").textContent = item.imdbRating
         templateItem.querySelector(".movie__categories").textContent = item.categories
         templateItem.querySelector(".movie__url").href = item.videoUrl
+        templateItem.querySelector(".movie__info").dataset.movieId = item.id
         
         tempFragment.appendChild(templateItem)
     }
@@ -125,4 +130,17 @@ elForm.addEventListener("submit" , function (evt) {
     moviesRender(filteredArray, elMovieWrapper);
 })
 
+
+elMovieWrapper.addEventListener("click", function (evt) {
+    let currentId = evt.target.dataset.movieId;
+
+    if (currentId) {
+        let foundInfo = normolizedArray.find(function(item) {
+            return item.id == currentId
+        })
+
+        elModalTitle.textContent = foundInfo.title
+        elModalBody.textContent = foundInfo.summary
+    }
+})
 
