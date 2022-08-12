@@ -46,24 +46,8 @@
               <button type="submit" class="btn bg-primary text-white w-100 p-2">Search</button>
             </form>
             
-            <div>
+            <div class="bookmark__wrapper">
               <h2 class="fw-bold mx-3">Bookmarked movies</h2>
-              
-              <div class="border p-3">
-                <h4 class="mx-1 mb-2">Avengers:Infinity War</h4>
-                
-                <button class="btn bg-danger text-white rounded-1 pe-2 ps-2 mx-1">Remove</button>
-              </div>
-              <div class="border p-3">
-                <h4 class="mx-1 mb-2">The Avengers</h4>
-                
-                <button class="btn bg-danger text-white rounded-1 pe-2 ps-2 mx-1">Remove</button>
-              </div>
-              <div class="border p-3">
-                <h4 class="mx-1 mb-2">12 Years a Slave</h4>
-                
-                <button class="btn bg-danger text-white rounded-1 pe-2 ps-2 mx-1">Remove</button>
-              </div>
             </div>
           </div>
           
@@ -88,11 +72,6 @@
       </div>
     </section>
   </main>
-  
-  <!-- Button trigger modal -->
-  <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-  </button> -->
   
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -135,11 +114,19 @@
             <div class="d-flex justify-content-between">
               <a href="#" target="_blank" class="btn btn-outline-primary p-2 movie__url">Watch trailer</a>
               <button type="button" class="btn btn-outline-info p-2 movie__info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">More info</button>
-              <button class="btn btn-outline-success p-2">Bookmark</button>
+              <button class="btn btn-outline-success p-2 movie__bookmark">Bookmark</button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </template>
+
+  <template id="bookmark__template">
+    <div class="border p-3">
+      <h4 class="mx-1 mb-2 bookmark__title">Avengers:Infinity War</h4>
+      
+      <button class="btn bg-danger text-white rounded-1 pe-2 ps-2 mx-1 bookmark__remove-btn">Remove</button>
     </div>
   </template>
   

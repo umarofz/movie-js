@@ -1,5 +1,6 @@
 let elMovieWrapper = document.querySelector(".movie__wrapper");
 let elTemplate = document.querySelector("#movie__card").content;
+let elBookmarkTemplate = document.querySelector("#bookmark__template").content;
 let elForm = document.querySelector(".form");
 let elInput = document.querySelector(".rating__input");
 let elInputYear = document.querySelector(".year__input");
@@ -8,8 +9,12 @@ let elModalTitle = document.querySelector(".modal__title");
 let elModalBody = document.querySelector(".modal__body");
 let elSpan = document.querySelector(".result__span")
 let elInputSorting = document.querySelector(".form__sorting")
+let elBookmarkWrapper = document.querySelector(".bookmark__wrapper")
 
 let moviesArray = movies.slice(0, 30);
+let localMovies = JSON.parse(localStorage.getItem("bookmarkedMovies"))
+let bookmarkedMovies = localMovies ? localMovies: [];
+renderBookmarks(bookmarkedMovies)
 
 let normolizedArray = moviesArray.map(item => {
     return {
@@ -74,6 +79,7 @@ function moviesRender(array, wrapper) {
         templateItem.querySelector(".movie__categories").textContent = item.categories
         templateItem.querySelector(".movie__url").href = item.videoUrl
         templateItem.querySelector(".movie__info").dataset.movieId = item.id
+        templateItem.querySelector(".movie__bookmark").dataset.bookmarkId = item.id
         
         tempFragment.appendChild(templateItem)
     }
@@ -96,7 +102,7 @@ elForm.addEventListener("submit" , function (evt) {
         let validation = item.movieYear >= inputYear && item.imdbRating >= inputRating && isTrue
         return validation
     })
-
+    
     if (inputSorting == "rating_high_low") {
         filteredArray.sort((a, b) => {
             return b.imdbRating - a.imdbRating
@@ -133,14 +139,67 @@ elForm.addEventListener("submit" , function (evt) {
 
 elMovieWrapper.addEventListener("click", function (evt) {
     let currentId = evt.target.dataset.movieId;
-
+    let currentBookmarkId = evt.target.dataset.bookmarkId;
+    
     if (currentId) {
         let foundInfo = normolizedArray.find(function(item) {
             return item.id == currentId
         })
-
+        
         elModalTitle.textContent = foundInfo.title
         elModalBody.textContent = foundInfo.summary
     }
+    
+    if (currentBookmarkId) {
+        let foundMovie = normolizedArray.find(function(item) {
+            return item.id == currentBookmarkId
+        })
+        
+        if (bookmarkedMovies.length == 0) {
+            bookmarkedMovies.unshift(foundMovie)
+            localStorage.setItem("bookmarkedMovies", JSON.stringify(bookmarkedMovies))
+        } else {
+            let isMovieInArray = bookmarkedMovies.find(function(item) {
+                return item.title == foundMovie.title
+            })
+            
+            if (!isMovieInArray) {
+                bookmarkedMovies.unshift(foundMovie)
+                localStorage.setItem("bookmarkedMovies", JSON.stringify(bookmarkedMovies))
+            }
+        }
+        renderBookmarks(bookmarkedMovies)
+    }
 })
 
+
+function renderBookmarks(arrayOfMovies) {
+    elBookmarkWrapper.innerHTML = null;
+    
+    let fragment = document.createDocumentFragment();
+    
+    for (const item of arrayOfMovies) {
+        let bookmarkItem = elBookmarkTemplate.cloneNode(true)
+        
+        bookmarkItem.querySelector(".bookmark__title").textContent = item.title;
+        bookmarkItem.querySelector(".bookmark__remove-btn").dataset.bookmarkId = item.id;
+
+        fragment.appendChild(bookmarkItem)
+    }
+
+    elBookmarkWrapper.appendChild(fragment)
+}
+
+elBookmarkWrapper.addEventListener("click", function(evt) {
+    let bookmarkedMovieId = evt.target.dataset.bookmarkId;
+
+    if (bookmarkedMovieId) {
+        let foundBookmarkedMovie = bookmarkedMovies.findIndex(function(item) {
+            return item.id == bookmarkedMovieId
+        })
+
+        bookmarkedMovies.splice(foundBookmarkedMovie, 1);
+        localStorage.setItem("bookmarkedMovies", JSON.stringify(bookmarkedMovies))
+    }
+    renderBookmarks(bookmarkedMovies);
+})
